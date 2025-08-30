@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="./menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Internal CSS for User Div */
+        .user {
+            position: fixed;
+            top: 15px;
+            right: 40px;
+            /* background-color: #f5f5f5; */
+            padding: 10px;
+            /* border-radius: 5px; */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+            color: #333;
+            z-index: 10000;
+        }
+        .user p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <section id="Home">
+        <nav>
+            <div class="logo">
+                <img src="image/logo.png" alt="Logo">
+            </div>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="./gallary.html">Gallery</a></li>
+                <li><a href="./review.html">Review</a></li>
+                <li><a href="./order_details.html">Order Details</a></li>
+            </ul>
+
+            <!-- User Div -->
+            <div class="user" id="userDiv">
+                <p>Username: <span id="username">Guest</span></p>
+            </div>
+
+        
+        </nav>
+    </section>
+
+    <div class="menu" id="Menu">
+        <h1>Our<span>Menu</span></h1>
+        <div class="menu_box">
+            <!-- Menu Items -->
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/buger.jpg" alt="Burger">
+                </div>
+                <div class="menu_info">
+                    <h2>Burger</h2>
+                    <h3>₹200</h3>
+                    <a href="./order.html?name=Burger&price=200" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/pasta.jpg" alt="Pasta">
+                </div>
+                <div class="menu_info">
+                    <h2>Pasta</h2>
+                    <h3>₹250</h3>
+                    <a href="./order.html?name=Pasta&price=250" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/lasagna.webp" alt="Lasagna">
+                </div>
+                <div class="menu_info">
+                    <h2>Lasagna</h2>
+                    <h3>₹300</h3>
+                    <a href="./order.html?name=Lasagna&price=300" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/chocolate_drink.jpg" alt="Chocolate Drink">
+                </div>
+                <div class="menu_info">
+                    <h2>Chocolate Drink</h2>
+                    <h3>₹150</h3>
+                    <a href="./order.html?name=Chocolate Drink&price=150" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/pizza.jpg" alt="Pizza">
+                </div>
+                <div class="menu_info">
+                    <h2>Pizza</h2>
+                    <h3>₹350</h3>
+                    <a href="./order.html?name=Pizza&price=350" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/sandwich.jpg" alt="Sandwich">
+                </div>
+                <div class="menu_info">
+                    <h2>Sandwich</h2>
+                    <h3>₹180</h3>
+                    <a href="./order.html?name=Sandwich&price=180" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/biryani.webp" alt="biryani">
+                </div>
+                <div class="menu_info">
+                    <h2>Biryani</h2>
+                    <h3>₹220</h3>
+                    <a href="./order.html?name=Biryani&price=220" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/Hot_dog.jpg" alt="hotdog">
+                </div>
+                <div class="menu_info">
+                    <h2>Hot dog</h2>
+                    <h3>₹120</h3>
+                    <a href="./order.html?name=hot dog&price=120" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/cake.jpg" alt="Cheesecake">
+                </div>
+                <div class="menu_info">
+                    <h2>Cheesecake</h2>
+                    <h3>₹400</h3>
+                    <a href="./order.html?name=Cheesecake&price=400" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/juse.jpg" alt="spanchi">
+                </div>
+                <div class="menu_info">
+                    <h2>Spanchi</h2>
+                    <h3>₹80</h3>
+                    <a href="./order.html?name=Spanchi&price=80" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+            <div class="menu_card">
+                <div class="menu_image">
+                    <img src="image/ice_cream.jpg" alt="ice cream">
+                </div>
+                <div class="menu_info">
+                    <h2>ice cream</h2>
+                    <h3>₹80</h3>
+                    <a href="./order.html?name=ice cream&price=80" class="menu_btn">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const usernameSpan = document.getElementById('username');
+            const username = localStorage.getItem('username'); // Retrieve username from storage
+
+            // Update the username display
+            usernameSpan.textContent = username || 'Guest';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="./order.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional CSS for Grid and Cuboid Structure */
+        #orderDetails {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .order_card {
+            background-color: #f9f9f9;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .order_card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .order_card h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .order_card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .delete_btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #ff4c4c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete_btn:hover {
+            background-color: #e63e3e;
+        }
+
+        /* CSS for User Div */
+        .user {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            /* background-color: #f5f5f5; */
+            padding: 10px;
+            /* border-radius: 5px; */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+            color: #333;
+            z-index: 10000;
+        }
+        .user p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <section id="Home">
+        <nav>
+            <div class="logo">
+                <img src="image/logo.png" alt="Logo">
+            </div>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./menu.html">Menu</a></li>
+                <li><a href="./gallery.html">Gallery</a></li>
+                <li><a href="./review.html">Review</a></li>
+                <li><a href="#">Order Details</a></li>
+            </ul>
+
+            <!-- User Div -->
+            <div class="user" id="userDiv">
+                <p>Username: <span id="username">Guest</span></p>
+            </div>
+
+            <!-- <div class="icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div> -->
+        </nav>
+    </section>
+
+    <!-- Order Details Section -->
+    <div class="order">
+        <h1><span>Your</span> Order Details</h1>
+        <div id="orderDetails">
+            <!-- User's orders will be displayed dynamically -->
+        </div>
+    </div>
+
+    <!-- JavaScript for Fetching & Deleting User Orders -->
+    <script>
+        async function fetchUserOrders() {
+            const token = localStorage.getItem('token'); // Retrieve token
+            const username = localStorage.getItem('username'); // Retrieve username
+
+            // Update username in user div
+            const usernameSpan = document.getElementById('username');
+            usernameSpan.textContent = username || 'Guest';
+
+            if (!token) {
+                alert("You need to log in first!");
+                window.location.href = "login.html"; // Redirect to login page
+                return;
+            }
+
+            const response = await fetch('http://localhost:5000/orders', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const orders = await response.json();
+
+            const orderDetailsElem = document.getElementById('orderDetails');
+            if (orders.length === 0) {
+                orderDetailsElem.innerHTML = '<p>No orders placed yet!</p>';
+                return;
+            }
+
+            orderDetailsElem.innerHTML = orders.map((order, index) => `
+                <div class="order_card">
+                    <h2>Order #${index + 1}</h2>
+                    <p><strong>Food Name:</strong> ${order.foodName}</p>
+                    <p><strong>Quantity:</strong> ${order.quantity}</p>
+                    <p><strong>Total Price:</strong> ₹${order.totalPrice}</p>
+                    <p><strong>Number:</strong> ${order.number}</p>
+                    <p><strong>Instructions:</strong> ${order.instructions}</p>
+                    <p><strong>Address:</strong> ${order.address}</p>
+                    <button onclick="deleteOrder(${index})" class="delete_btn">Delete Order</button>
+                </div>
+            `).join('');
+        }
+
+        async function deleteOrder(orderIndex) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Unauthorized! Please log in.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const response = await fetch('http://localhost:5000/delete-order', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ index: orderIndex })
+            });
+
+            if (response.ok) {
+                alert('Order deleted successfully!');
+                fetchUserOrders(); // Refresh the order details
+            } else {
+                alert('Failed to delete order.');
+            }
+        }
+
+        fetchUserOrders();
+    </script>
+</body>
+</html>
